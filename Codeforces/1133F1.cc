@@ -2,6 +2,14 @@
 
 using namespace std;
 
+// to get a spanning tree we can use different algorithms.  I am using
+// Kruskal's algorithm to keep connecting unconnected vertices, except
+// that I process the edges in arbitrary order because I don't care about
+// weights.  To get the maximum degree possible, I start with any vertex
+// with max degree and add all its neighbours, and then proceed with the
+// rest of Kruskal's algorithm.  No other spanning tree can have a higher
+// degree.
+
 vector<int> G[200001];
 
 // UnionFind class -- based on Howard Cheng's C code for UnionFind
