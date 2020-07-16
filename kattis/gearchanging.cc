@@ -4,7 +4,7 @@ using namespace std;
 
 typedef long long ll;
 
-// the idea is to look at all possible cadence as C_i/D_j, sort the list, and
+// the idea is to look at all possible cadence as D_i/C_j, sort the list, and
 // check that the increase from one to the other is not too large.  The only
 // trick is to do everything as integer arithmetic.
 
@@ -16,7 +16,7 @@ struct Gear
 
   bool operator<(const Gear &g) const
   {
-    return C * g.D < g.C * D;
+    return D * g.C < C * g.D;
   }
 };
 
@@ -44,7 +44,7 @@ int main()
 
   //  100*(D1*C2 - D2*C1) <= D2*C1 * P
   for (int i = 0; i < k-1; i++) {
-    if (100*(G[i].D*G[i+1].C - G[i].C*G[i+1].D) > G[i].C*G[i+1].D*P) {
+    if (100*(G[i+1].D*G[i].C - G[i].D*G[i+1].C) > G[i+1].C*G[i].D*P) {
       cout << "Time to change gears!" << endl;
       return 0;
     }
