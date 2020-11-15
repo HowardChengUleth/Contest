@@ -1,3 +1,7 @@
+//
+// relatively straightforward?  We do have to worry about positive and
+// negative numbers.
+//
 #include <bits/stdc++.h>
 
 using namespace std;

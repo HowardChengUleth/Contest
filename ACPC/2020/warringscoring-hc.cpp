@@ -1,3 +1,6 @@
+// this is just a simulation problem...as with all simulation, follow all
+// rules carefully
+
 #include <bits/stdc++.h>
 
 using namespace std;

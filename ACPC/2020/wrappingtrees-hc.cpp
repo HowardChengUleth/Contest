@@ -63,6 +63,9 @@ int main()
   //
   // only have to deal with left hand corner since it shrinks to a point.
   //
+  // Once you figured out where all the blocks move to, then it is
+  // just a matter of computing the convex hull of all the points.
+  //
   // doesn't work though if it is 1x1 though
  
   int N;

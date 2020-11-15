@@ -1,3 +1,12 @@
+//
+// I use the least common ancestor code from the library: A is a boss of B
+// if LCA(A, B) == A.
+//
+// A simpler way may be to use DFS from the root and record the "time" at which
+// you enter and leave each node.  Then A is a boss of B iff:
+//
+//   enter[A] <= enter[B] <= exit[B] <= exit[A]
+
 #include <bits/stdc++.h>
 
 using namespace std;

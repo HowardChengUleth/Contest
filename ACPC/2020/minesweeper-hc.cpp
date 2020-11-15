@@ -2,9 +2,12 @@
 
 using namespace std;
 
-// fill one column at a time
-// do DP where the state would be what column are we on and what are the
-// first 2 columns
+// The idea is to fill one column at a time.  For each column, try all
+// possible 2^h patterns.  Note that the first column can only affect
+// up to the first 2 columns.
+//
+// So we can do DP where the state would be what column are we on and
+// what are the first 2 columns (2^(2h) states)
 
 int w, h, k;
 

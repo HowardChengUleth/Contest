@@ -1,3 +1,13 @@
+//
+// There are many solutions.  What I have here is perhaps an overkill,
+// using suffix arrays on the string made up from the concatenation of
+// each password (doubled) and its reverse (doubled).
+//
+// Another way is to compute the minimum rotation for each string and its
+// reverse as a signature so it is easy to search (also in code library).
+//
+// You can also use string hashing to do this.
+
 #include <bits/stdc++.h>
 
 using namespace std;

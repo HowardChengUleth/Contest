@@ -1,9 +1,5 @@
 //
-// Comments:
-//
-// Inputs/Outputs: section numbers should be removed
-// 
-// Inputs: for the bounds on a and b, do you mean L and H instead of l and h?
+// Just simulate.  Not much else to do
 //
 
 #include <bits/stdc++.h>
@@ -28,10 +24,6 @@ int main()
     int l, h, a, b;
     cin >> l >> h >> a >> b;
 
-    /*
-    assert(0 <= a && a < l);
-    assert(0 <= b && b < h);
-    */
     for (int r = b; r < min(b+h, H); r++) {
       for (int c = a; c < min(a+l, L); c++) {
 	grid[r][c] = ch;

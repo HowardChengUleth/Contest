@@ -1,3 +1,10 @@
+// A brute force O(n^2) algorithm to compare all pairs of points is too slow,
+// but you are told that there are not many pings in a time window.  So if
+// you sort the pings by time, then for each ping you only have to look back
+// at most 5 pings to see how many are close.  Other than that you just have
+// to do the usual squared distance comparison instead of taking square
+// roots to avoid rounding errors.
+
 #include <bits/stdc++.h>
 
 using namespace std;

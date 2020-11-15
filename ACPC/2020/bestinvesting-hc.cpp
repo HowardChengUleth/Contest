@@ -1,3 +1,15 @@
+// the idea is that every year, we ask: if we were to withdraw the maximum
+// amount from now to the end, do we have enough money to do that?  If so
+// we just withdraw everything.
+//
+// Otherwise, we need to depositi a certain amount.
+//
+// You will need to work out something like
+// this: if currently we have a balance of P and withdraw w, then we will
+// have (P-w)*r next year.  Withdrawing w again the following year, you
+// will get ((P-w)*r-w)*r after that, and so on.  Expand this and you will
+// get a geometric series that can be simplified.
+
 #include <bits/stdc++.h>
 
 using namespace std;

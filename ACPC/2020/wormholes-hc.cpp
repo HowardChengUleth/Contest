@@ -1,3 +1,9 @@
+// one can probably work backwards and see what is the minimum
+// starting velocity at the beginning of each segment...
+//
+// The approach below is to use binary search on the starting velocity,
+// and see if we can get all the way to the end.
+
 #include <bits/stdc++.h>
 
 using namespace std;

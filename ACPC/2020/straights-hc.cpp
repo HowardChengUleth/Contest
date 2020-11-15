@@ -1,3 +1,12 @@
+// The trick here is to realize that we can just look at the frequency
+// of each numbers.  Whenever freq[i] > freq[i-1], we must start another
+// straight.  The number of straights you need to start is exactly
+// freq[i] - freq[i-1].  If they are equal then all current straights
+// can keep going.  If freq[i] < freq[i-1] then some of the current straights
+// will be stopped.
+//
+//
+
 #include <bits/stdc++.h>
 
 using namespace std;
