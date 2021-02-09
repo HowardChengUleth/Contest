@@ -65,17 +65,6 @@ int main() {
     string b = a;
     ll tok2 = t(u, b);
     ll u_ = H(u, b, tok2);
-    while (u_ == u || u_ == v) {
-        if (b[i] < 'z') {
-            b[i] += 1;
-        }
-        else {
-            b += "a";
-            i++;
-        }
-        tok2 = t(u, b);
-        u_ = H(u, b, tok2);
-    }
     cout << a << ' ' << tok1 << endl;
     cout << b << ' ' << tok2 << endl;
 }
