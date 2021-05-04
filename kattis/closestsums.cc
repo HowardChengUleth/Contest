@@ -11,7 +11,7 @@ int main(void)
   int sums_n;
   int case_num = 1;
 
-  while (cin >> n) {
+  while (cin >> n && n) {
     cout << "Case " << case_num++ << ":" << endl;
     for (int i = 0; i < n; i++) {
       cin >> A[i];
