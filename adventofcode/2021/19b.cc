@@ -110,26 +110,26 @@ ostream &operator<<(ostream &os, const Point p)
 
 bool lineup(PS &S1, const PS &S2, Point &offset)
 {
+  map<Point,int> freq;
   for (auto p1 : S1) {
     for (auto p2 : S2) {
       // line up p1 and p2
-      offset = p2 - p1;
-      PS trans;
-      int count = 0;
-      for (auto p3 : S2) {
-	count += S1.count(p3 - offset);
-      }
-
-      if (count < 12) continue;
-      
-      for (auto p3 : S2) {
-	S1.insert(p3 - offset);
-      }
-
-      return true;
+      Point offset = p2 - p1;
+      freq[offset]++;
     }
   }
 
+  for (auto [off, f] : freq) {
+    if (f < 12) continue;
+
+    for (auto p3 : S2) {
+      S1.insert(p3 - off);
+    }
+    offset = off;
+    return true;
+  }
+
+  
   return false;
 }
 

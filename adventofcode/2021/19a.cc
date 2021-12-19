@@ -85,26 +85,26 @@ Point normalize(Point p, int a1, int a2, int a3)
 
 bool lineup(PS &S1, const PS &S2)
 {
+  map<Point,int> freq;
   for (auto p1 : S1) {
     for (auto p2 : S2) {
       // line up p1 and p2
       Point offset = p2 - p1;
-      PS trans;
-      int count = 0;
-      for (auto p3 : S2) {
-	count += S1.count(p3 - offset);
-      }
-
-      if (count < 12) continue;
-      
-      for (auto p3 : S2) {
-	S1.insert(p3 - offset);
-      }
-      
-      return true;
+      freq[offset]++;
     }
   }
 
+  for (auto [offset, f] : freq) {
+    if (f < 12) continue;
+
+    for (auto p3 : S2) {
+      S1.insert(p3 - offset);
+    }
+      
+    return true;
+  }
+
+  
   return false;
 }
 
