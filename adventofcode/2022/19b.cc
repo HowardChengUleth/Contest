@@ -91,9 +91,9 @@ bool dont_build(const State &curr, int cost[4][4], int type)
 
   int need = 0;
   for (int i = 0; i < 4; i++) {
-    need = max(need, cost[i][type] * rem);
+    need = max(need, cost[i][type]);
   }
-  return (curr.resource[type] >= need);
+  return (curr.robot[type] >= need);
 }
 
 int max_geode(const State &s)
