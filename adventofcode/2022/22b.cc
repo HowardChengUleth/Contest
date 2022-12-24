@@ -2,12 +2,49 @@
 
 using namespace std;
 
+//   3
+// 2   0
+//   1
+
 const int dr[] = { 0, 1, 0, -1 };
 const int dc[] = { 1, 0, -1, 0 };
 
 int dirindex[256];
 
 vector<string> G;
+
+const int side_len[2] = { 4, 50 };
+const string side_map[2][3] = {
+  {"  0 ",
+   "123 ",
+   "  45"},
+  
+  {"  01",
+   "  2 ",
+   "345 "}
+};
+
+
+
+const int side_next[2][6][4] = {
+  {// R, D, L, U
+    { 5, 3, 1, 2 },
+    { 2, 4, 5, 0 },
+    { 3, 4, 1, 0 },
+    { 5, 4, 2, 0 },
+    { 5, 1, 2, 3 },
+    { 0, 1, 4, 3 },
+  },
+
+  {
+
+
+
+  }
+
+};
+
+
 
 int main()
 {
