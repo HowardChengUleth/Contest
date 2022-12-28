@@ -9,108 +9,198 @@ using namespace std;
 const int dr[] = { 0, 1, 0, -1 };
 const int dc[] = { 1, 0, -1, 0 };
 
-int dirindex[256];
-
-vector<string> G;
+int dirturn[256];
 
 const int side_len[2] = { 4, 50 };
-const string side_map[2][3] = {
+const string side_map[2][4] = {
   {"  0 ",
    "123 ",
-   "  45"},
+   "  45",
+   "    "},
   
-  {"  01",
-   "  2 ",
-   "345 "}
+  {" 01",
+   " 2 ",
+   "45 ",
+   "3  "}
 };
-
-
 
 const int side_next[2][6][4] = {
   {// R, D, L, U
-    { 5, 3, 1, 2 },
+    { 5, 3, 2, 1 },
     { 2, 4, 5, 0 },
     { 3, 4, 1, 0 },
     { 5, 4, 2, 0 },
     { 5, 1, 2, 3 },
     { 0, 1, 4, 3 },
   },
-
   {
-
-
-
+    { 1, 2, 4, 3 },
+    { 5, 2, 0, 3 },
+    { 1, 5, 4, 0 },
+    { 5, 1, 0, 4 },
+    { 5, 3, 0, 2 },
+    { 1, 3, 4, 2 }
   }
-
 };
 
+const int side_rot[2][6][4] = {
+  {// R, D, L, U
+    { 2, 0, 1, 2 },
+    { 0, 2, 3, 2 },
+    { 0, 1, 0, 3 },
+    { 3, 0, 0, 0 },
+    { 0, 2, 3, 0 },
+    { 2, 1, 0, 1 },
+  },
+  {
+    { 0, 0, 2, 3 },
+    { 2, 3, 0, 0 },
+    { 1, 0, 1, 0 },
+    { 1, 0, 1, 0 },
+    { 0, 0, 2, 3 },
+    { 2, 3, 0, 0 }
+  }
+};
 
+vector<vector<char>> face[6];
+int cube = -1;            // cube 0 = sample, cube 1 = real input
+string cmd;
+
+void read_input()
+{
+  string line;
+  int r = 0;
+  while (getline(cin, line) && line != "") {
+    if (cube < 0) {
+      cube = line.length() >= 50;
+      for (int i = 0; i < 6; i++) {
+	face[i].resize(side_len[cube]);
+	for (int r = 0; r < side_len[cube]; r++) {
+	  face[i][r].resize(side_len[cube], ' ');
+	}
+      }
+    }
+    for (int c = 0; c < (int)line.length(); c++) {
+      int map_r = r / side_len[cube];
+      int map_c = c / side_len[cube];
+      char f = side_map[cube][map_r][map_c];
+      if (f != ' ') {
+	face[f - '0'][r % side_len[cube]][c % side_len[cube]] = line[c];
+      }
+    }
+    
+    r++;
+  }
+
+  getline(cin, cmd);
+}
+  
+int curr_f, curr_r, curr_c, curr_dir;
+
+bool inside(int r, int c)
+{
+  return 0 <= r && r < side_len[cube] && 0 <= c && c < side_len[cube];
+}
+
+void rotate(int &r, int &c, int &dir)
+{
+  // rotate coordinates 90 deg ccw
+  int next_r = side_len[cube]-1-c;
+  int next_c = r;
+
+  // rotate direction 90 deg ccw
+  int next_dir = (dir + 3) % 4;
+
+  r = next_r;
+  c = next_c;
+  dir = next_dir;
+}
+
+void move_steps(int steps)
+{
+  while (steps--) {
+    int next_f = curr_f;
+    int next_r = curr_r + dr[curr_dir];
+    int next_c = curr_c + dc[curr_dir];
+    int next_dir = curr_dir;
+    if (!inside(next_r, next_c)) {
+      next_f = side_next[cube][curr_f][curr_dir];
+      next_r = (next_r + side_len[cube]) % side_len[cube];
+      next_c = (next_c + side_len[cube]) % side_len[cube];
+      for (int i = 0; i < side_rot[cube][curr_f][curr_dir]; i++) {
+	rotate(next_r, next_c, next_dir);
+      }
+    }
+
+    string dirchar = ">v<^";
+    if (face[next_f][next_r][next_c] != '#') {
+      face[curr_f][curr_r][curr_c] = dirchar[curr_dir];
+      curr_f = next_f;
+      curr_r = next_r;
+      curr_c = next_c;
+      curr_dir = next_dir;
+    }
+  }
+}
+
+void turn(char dir)
+{
+  curr_dir = (curr_dir + dirturn[dir]) % 4;
+}
+
+void process_cmd()
+{
+  curr_f = curr_r = curr_c = curr_dir = 0;
+  
+  istringstream iss(cmd);
+  int steps;
+  char dir;
+	    
+  while (true) {
+    if (!(iss >> steps)) break;
+
+    move_steps(steps);
+    
+    if (!(iss >> dir)) break;
+
+    turn(dir);
+  }
+}
 
 int main()
 {
-  string line;
-  while (getline(cin, line) && line != "") {
-    G.push_back(line);
-  }
+  read_input();
 
-  string cmd;
-  getline(cin, cmd);
-
-  int r, c;
-  int dir = 0;
-  r = c = 0;
-  while (c < G[0].length() && c != '.') {
-    c++;
-  }
+  dirturn['R'] = 1;
+  dirturn['L'] = 3;
   
-  istringstream iss(cmd);
-  while (true) {
-    int steps;
-    if (!(iss >> steps)) {
-      break;
-    }
-    for (int i = 0; i < steps; i++) {
-      int r2 = r + dr[dir], c2 = c + dc[dir];
+  process_cmd();
 
-      while (!(0 <= r2 && r2 < (int)G.size() && 0 <= c2 && c2 < (int)G[r2].length()
-	       && G[r2][c2] != ' ')) {
-	// out of bounds, adjust
-	if (r2 < 0 && dir % 2 == 1) r2 = G.size()-1;
-	else if (r2 >= (int)G.size() && dir % 2 == 1) r2 = 0;
-	else if (c2 < 0 && dir % 2 == 0) c2 = G[r2].length()-1;
-	else if (c2 >= (int)G[r2].length() && dir % 2 == 0) c2 = 0;
-	else {
-	  r2 += dr[dir];
-	  c2 += dc[dir];
-	}
+  for (int f = 0; f < 6; f++) {
+    cout << "Face = " << f << endl << endl;
+    for (const auto &v : face[f]) {
+      for (const auto &c : v) {
+	cout << c;
       }
-
-      if (G[r2][c2] == '#') {
-	break;
-      }
-      
-      r = r2;
-      c = c2;
+      cout << endl;
     }
-    
-    // move steps
-    char dirname;
-    if (!(iss >> dirname)) {
-      break;
-    }
-
-    if (dirname == 'R') {
-      dir = (dir+1) % 4;
-    } else {
-      dir = (dir+3) % 4;
-    }
+    cout << "======================" << endl;
   }
 
-  r++;
-  c++;
-  cout << "r, c, dir = " << r << ' ' << c << ' ' << dir << endl;
+  cout << curr_f << ' ' << curr_r << ' ' << curr_c << ' ' << curr_dir << endl;
 
-  int password = 1000 * r + 4 * c + dir;
+  for (int r = 0; r < 4; r++) {
+    string::size_type c = side_map[cube][r].find(curr_f + '0');
+    if (c == string::npos) continue;
+    curr_r += r * side_len[cube];
+    curr_c += c * side_len[cube];
+  }
+  curr_r++;
+  curr_c++;
+  
+  cout << curr_f << ' ' << curr_r << ' ' << curr_c << ' ' << curr_dir << endl;
+  
+  int password = 1000 * curr_r + 4 * curr_c + curr_dir;
   cout << password << endl;
   
   return 0;
