@@ -30,7 +30,7 @@ typedef tuple<ll, int, int> ti3;
 
 void dijkstra(int sr, int sc, vector<vector<ll>> &dist)
 {
-  const int EXPAND = 100;
+  const int EXPAND = 1000000;
   
   int M = grid.size();
   int N = grid[0].size();
