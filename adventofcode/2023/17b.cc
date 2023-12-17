@@ -144,7 +144,7 @@ void build_graph(Graph &G, int src, int dest)
   G.add_edge(src, index(0, 0, 0, 2), 0);
 
   // dest
-  for (int steps = 0; steps < 11; steps++) {
+  for (int steps = 4; steps < 11; steps++) {
     for (int dir = 0; dir < 4; dir++) {
       G.add_edge(index(M-1, N-1, steps, dir), dest, 0);
     }
