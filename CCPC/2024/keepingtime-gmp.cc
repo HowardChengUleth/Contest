@@ -1,35 +1,10 @@
 #include <bits/stdc++.h>
-
+#include <gmpxx.h>
 
 using namespace std;
 
-typedef __int128 ll;
+typedef mpz_class ll;
 
-std::ostream&
-operator<<( std::ostream& dest, __int128 value )
-{
-    std::ostream::sentry s( dest );
-    if ( s ) {
-        __int128 tmp = value < 0 ? -value : value;
-        char buffer[ 128 ];
-        char* d = std::end( buffer );
-        do
-        {
-            -- d;
-            *d = "0123456789"[ tmp % 10 ];
-            tmp /= 10;
-        } while ( tmp != 0 );
-        if ( value < 0 ) {
-            -- d;
-            *d = '-';
-        }
-        int len = std::end( buffer ) - d;
-        if ( dest.rdbuf()->sputn( d, len ) != len ) {
-            dest.setstate( std::ios_base::badbit );
-        }
-    }
-    return dest;
-}
 ll gcd(ll a, ll b, ll &s, ll &t) { // a*s+b*t = g
   if (b==0) { t = 0; s = (a < 0) ? -1 : 1; return (a < 0) ? -a : a;
   } else { ll g = gcd(b, a%b, t, s);  t -= a/b*s;  return g; }
@@ -61,7 +36,7 @@ ll myfloor(ll num, ll den)
 
 int main()
 {
-  long long N, A, B;
+  ll N, A, B;
   cin >> N >> A >> B;
 
   ll g, s, t;
