@@ -17,7 +17,7 @@ int main()
     bool good = true;
     for (int i = 0; i < M && good; i++) {
       good &= !((S & (1 << (bad[i].first-1))) &&
-		(S & (1 << (bad[i].second-1))));
+        (S & (1 << (bad[i].second-1))));
     }
     if (good) {
       ans++;
