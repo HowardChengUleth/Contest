@@ -5,7 +5,7 @@ using namespace std;
 
 int C, N, M, D;
 
-int solve()
+int solve(int num_planted)
 {
   int day = 0;
 
@@ -28,7 +28,7 @@ int solve()
     }
 
     // only plant trees if we can, but don't plant more than needed
-    if (coconuts > 0 && trees + mature.size() < N) {
+    if (coconuts > 0 && trees + mature.size() < num_planted) {
       coconuts--;
       mature.push(day + D);
     }
@@ -41,7 +41,11 @@ int solve()
 int main()
 {
   cin >> C >> N >> M >> D;
-  cout << solve() << endl;
-  
+
+  int ans = INT_MAX;
+  for (int i = N; i <= 100; i++) {
+    ans = min(ans, solve(i));
+  }
+  cout << ans << endl;
   return 0;
 }
