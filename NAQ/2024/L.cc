@@ -11,6 +11,22 @@ using namespace std;
 typedef pair<int,int> pii;
 typedef deque<pii> Snake;
 
+const int MOD = 20000003;
+
+namespace std {
+  template <>
+  struct hash<Snake> {
+    auto operator()(const Snake &snake) const -> size_t {
+      size_t val = 0;
+      for (auto [r, c] : snake) {
+	val = ((val << 7) + (r << 4) + c) % MOD;
+      }
+      return val;
+    }
+  };
+}
+
+
 int R, C;
 vector<string> A;
 
@@ -73,12 +89,12 @@ bool can_move(const Snake &snake, int dir)
 
 Snake move_snake(const Snake &snake, int dir)
 {
-  Snake res = snake;
-  auto head = res[0];
-  res.pop_back();
-
+  auto head = snake[0];
   head.first += dr[dir];
   head.second += dc[dir];
+
+  Snake res = snake;
+  res.pop_back();
   res.push_front(head);
   return res;
 }
@@ -93,7 +109,8 @@ void print_snake(const Snake &s)
 
 void BFS(const Snake &snake)
 {
-  set<Snake> visited;
+  unordered_set<Snake> visited;
+  visited.reserve(1000000);
   queue<Snake> Q;
 
   Q.push(snake);
@@ -107,7 +124,6 @@ void BFS(const Snake &snake)
       if (!can_move(curr, dir)) {
 	continue;
       }
-
       auto next = move_snake(curr, dir);
       if (next[0] == apple) {
 	cout << 1 << endl;
