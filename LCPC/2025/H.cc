@@ -2,29 +2,19 @@
 
 using namespace std;
 
-typedef pair<int,int> pii;
-
 int main()
 {
   int n;
   cin >> n;
 
-  vector<pii> v(n);
-  for (int i = 0; i < n; i++) {
-    cin >> v[i].first >> v[i].second;
-  }
-
   set<int> S;
-  int ans = 0;
-  for (auto [r, f] : v) {
-    int h = r + f;
-    if (S.count(h) == 0) {
-      ans++;
-      S.insert(h);
-    }
+  for (int i = 0; i < n; i++) {
+    int r, f;
+    cin >> r >> f;
+    S.insert(r+f);
   }
 
-  cout << ans << endl;
+  cout << S.size() << endl;
 
   return 0;
 }
