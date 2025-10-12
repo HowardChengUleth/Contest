@@ -208,7 +208,7 @@ int main()
       cout << initA << endl;
       break;
     }
-    inc = max(inc, (1LL << (max(0, matched-3)*3)));
+    inc = max(inc, (1LL << (max(0, matched-4)*3)));
     initA += inc;
   }
   
