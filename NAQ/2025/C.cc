@@ -14,7 +14,7 @@ int main()
     D.insert(d);
   }
 
-  cout << min(k, D.size()) << endl;
+  cout << min(k, (int)D.size()) << endl;
 
 
   return 0;
