@@ -1,3 +1,14 @@
+// One way to solve it is to find a function for (x(theta),y(theta)) for
+// each corner of the umbrella, and then solve for theta to be outside the
+// table.  Combine the intervals of theta for x(theta) and y(theta) and all
+// four corners.
+//
+// But because the required precision is quite low (only 2 digits of accuracy),
+// we can just divide the total rotation (360 or even 180) to small increments.
+// For each increment, do the rotations and count how many of these increments
+// work.  That is good enough.
+//
+
 #include <bits/stdc++.h>
 
 using namespace std;

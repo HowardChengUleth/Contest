@@ -1,3 +1,11 @@
+// Basically we have to merge the mixtures both directly and indirectly, and
+// for each combined mixture, keep track of the scores
+//
+// If we use Union Find (Disjoint Set) data structure, we can easily merge
+// all the mixtures.  For each pair, we can easily find out if they are in
+// the same mixture.  The ID returned by UnionFind::find can be used to
+// identify the group and keep track of the score for that group
+
 #include <bits/stdc++.h>
 
 using namespace std;

@@ -1,3 +1,6 @@
+// for each segment, figure out how many segments there are and then move
+// appropriately
+
 #include <bits/stdc++.h>
 
 using namespace std;

@@ -1,3 +1,12 @@
+// Basically this is a standard knapsack problem, so the idea is you
+// use dynamic programming to compute f(i,w) = max utility of all the
+// tools i..n-1 if you use up exactly weight w.
+//
+// So for each tool consider, either you use it or you don't.  The only
+// tricky part is that if you use a multiuse tool, you have to skip over
+// all the other tools that are the same type.  Otherwise it is just the
+// same dynamic programming solution to knapsack.
+
 #include <bits/stdc++.h>
 
 using namespace std;

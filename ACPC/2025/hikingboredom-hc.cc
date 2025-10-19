@@ -1,3 +1,9 @@
+// Just do it?
+//
+// Of course you have to be careful with everything.  Using stoi will
+// make things a lot easier.  Also, no need to worry about keeping things
+// as integers, since we are dealing with a floating point output
+
 #include <bits/stdc++.h>
 
 using namespace std;

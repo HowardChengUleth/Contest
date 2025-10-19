@@ -1,3 +1,12 @@
+// The idea is to factor the number.  If you have a prime factorization
+//
+//   N = p1^e1 * p2^e2 * ... * pk^ek
+//
+// Then the number of factors are (e1+1)*(e2+1)*...*(ek+1).
+//
+// Problem is: how do you factor such large numbers?  Use the code library...
+//
+
 #include <bits/stdc++.h>
 
 // Gives the prime factorization of natural numbers (Uses probability)

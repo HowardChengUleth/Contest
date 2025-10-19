@@ -1,3 +1,6 @@
+// for each step, move the back leg as far as you can, and then move the
+// front leg as far as you can, and repeat for as long as you can go
+
 #include <bits/stdc++.h>
 
 using namespace std;

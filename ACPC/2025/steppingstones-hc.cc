@@ -1,3 +1,5 @@
+// This is a typical BFS implementation
+
 #include <bits/stdc++.h>
 
 using namespace std;

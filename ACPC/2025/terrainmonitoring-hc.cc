@@ -1,3 +1,13 @@
+// This is an advanced problem.  There are a lot of points, so if you
+// just do brute force to scan for the min/max each time, it will TLE.
+//
+// You need a data structure that allows you to easily find the min/max
+// in a range, and also allow updates to be made to the underlying array.
+// One such data structure is a segment tree.
+//
+// Below is not a great implementation but it is meant to be "easier"
+// to follow.
+//
 #include <bits/stdc++.h>
 
 using namespace std;

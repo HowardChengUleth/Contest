@@ -1,3 +1,10 @@
+// We can precompute all of them...we can keep track of the number of
+// trees at each age (0, 1, 2, or >= 3 years), and then update them
+// one year at a time.  So we can precompute the answers for all the
+// years (only 10 million) and look them up.
+//
+// I am remembering what the queries are so I can stuff them into the
+// right slots when I compute them...there are easier ways.
 #include <bits/stdc++.h>
 
 using namespace std;
