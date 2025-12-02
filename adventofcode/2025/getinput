@@ -1,0 +1,12 @@
+#!/bin/bash
+
+DAY=$1
+echo 
+curl "https://adventofcode.com/2025/day/${DAY}/input" -H 'Accept-Encoding: gzip, deflate, br' -H "Referer: https://adventofcode.com/2025/day/${DAY}" -H 'Connection: keep-alive' -H 'Cookie: _ga=GA1.2.1601153171.1764372563; session=53616c7465645f5fb7883b26bbc86c4a7e96ad6f864a5d8971f0f274be36d0c1ce579bcfcd7f92efec5ddd695ced9a8bbfa195b56f64ed37818d313b71d1bbb5; _gid=GA1.2.829388579.1764647077; _ga_MHSNPJKWC7=GS2.2.s1764647077$o2$g1$t1764647148$j60$l0$h0' --output input.gz
+
+gunzip input.gz
+
+cp input ${DAY}a-2.in
+cp input ${DAY}b-2.in
+
+rm -f input

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+DAY=$1
+rm -f $1a $1b $1*.in *~
+git add $1[ab].cc
+git commit
+git push
