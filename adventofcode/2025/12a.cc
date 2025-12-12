@@ -75,8 +75,14 @@ bool canfit(int freq[6])
   }
 
   if (area > M*N) {
-    cout << "M, N = " << M << ' ' << N << ' ' << "area = " << area << endl;
     return false;
+  } else {
+    int blocks = M/3 * N/3;
+    int total_freq = accumulate(freq, freq+6, 0);
+      
+    cout << "excess = " << M*N - area << endl;
+    cout << "blocks - total_freq = " << blocks - total_freq << endl;
+    assert(blocks >= total_freq);
   }
 
 
