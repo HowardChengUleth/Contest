@@ -223,7 +223,7 @@ Fraction EVroll()
   int a, b;
   cin >> a >> b;
   
-  // there is a close form formula...
+  // there is a close form formula...it is (a+b)/2
   Fraction EV;
   for (int i = a; i <= b; i++) {
     EV += i;
